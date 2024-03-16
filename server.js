@@ -86,6 +86,8 @@ mongoose.connect(process.env.MONGO_URI)
 
         console.log("io being created on server", server)
 
+        console.log("IO: ", io)
+
         io.on("connection", socket => {
           console.log('Connection established: ', socket.id)
           socket.on("setup", (userData) => {
