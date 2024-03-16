@@ -76,11 +76,12 @@ mongoose.connect(process.env.MONGO_URI)
         console.log('listening on port ', process.env.PORT)
         console.log('attmepting to setup sockets')
         const corsOptions = {
-          origin: ["disruptchat.onrender.com", "https://admin.socket.io", "localhost:3000"],
+          origin: ["https://disruptchat.onrender.com", "https://admin.socket.io", "http://localhost:3000"],
           methods:["GET", "POST"],
           credentials: true
         }
         const io = require('socket.io')(server, {
+          transports: ['websocket', 'polling'], // Specify WebSocket first, then polling
           cors: corsOptions
         });
 
