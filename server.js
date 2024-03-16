@@ -75,7 +75,7 @@ mongoose.connect(process.env.MONGO_URI)
        const server = app.listen(process.env.PORT, () => {
         console.log('listening on port ', process.env.PORT)
         const corsOptions = {
-          origin: ["http://localhost:3000", "https://admin.socket.io"],
+          origin: ["disruptchat.onrender.com", "https://admin.socket.io"],
           methods:["GET", "POST"],
           credentials: true
         }
