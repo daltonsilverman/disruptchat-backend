@@ -74,6 +74,7 @@ mongoose.connect(process.env.MONGO_URI)
     .then(() => {
        const server = app.listen(process.env.PORT, () => {
         console.log('listening on port ', process.env.PORT)
+        console.log('attmepting to setup sockets')
         const corsOptions = {
           origin: ["disruptchat.onrender.com", "https://admin.socket.io"],
           methods:["GET", "POST"],
@@ -85,7 +86,6 @@ mongoose.connect(process.env.MONGO_URI)
 
         io.on("connection", socket => {
           console.log('Connection established: ', socket.id)
-
           socket.on("setup", (userData) => {
             socket.join(userData._id);
             socket.emit("connected");
