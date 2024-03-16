@@ -93,6 +93,11 @@ mongoose.connect(process.env.MONGO_URI)
             socket.emit("connected");
           })
 
+          socket.on('error', (error) => {
+            console.error('Socket error:', error);
+          });
+
+
           socket.on("join chat", (room) => {
             socket.join(room);
             const roomObject = io.sockets.adapter.rooms.get(room);
@@ -120,7 +125,11 @@ mongoose.connect(process.env.MONGO_URI)
             socket.to(room).emit('received message', (newMessage))
           })
         })
-        instrument(io, { auth: false })
+
+        io.on('error', (error) => {
+          console.error('Socket.IO error:', error);
+        });
+        
        }) 
     })
     .catch((error) => {
